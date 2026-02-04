@@ -1,0 +1,85 @@
+name: CI
+
+permissions:
+  contents: read
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  lint-and-format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Check for Vulnerabilities
+        run: pnpm audit --prod
+
+      - name: Check Formatting (Prettier)
+        run: pnpm format
+
+      - name: Linting (ESLint)
+        run: pnpm lint
+
+      - name: Type Check & Build
+        run: pnpm build
+
+  unit-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Run Unit Tests with Coverage
+        run: pnpm test:coverage
+
+  validate-skills:
+    runs-on: ubuntu-latest
+    needs: [lint-and-format, unit-tests]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build CLI for validation
+        run: pnpm build
+
+      - name: Validate skill format and structure
+        run: pnpm validate
+
+      - name: Check if Token Metrics are in-sync
+        run: |
+          pnpm calculate-tokens
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "❌ Token metrics or README are out of sync! Please run 'pnpm calculate-tokens' locally and commit the changes."
+            git status --porcelain
+            exit 1
+          fi
+          echo "✅ Token metrics are synchronized."

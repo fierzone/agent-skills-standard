@@ -1,0 +1,115 @@
+name: Publish Process
+
+on:
+  push:
+    tags:
+      - 'cli-v*'
+      - 'flutter-v*'
+      - 'dart-v*'
+      - 'nestjs-v*'
+      - 'nextjs-v*'
+      - 'angular-v*'
+      - 'golang-v*'
+      - 'typescript-v*'
+      - 'javascript-v*'
+      - 'common-v*'
+      - 'react-v*'
+      - 'react-native-v*'
+      - 'java-v*'
+      - 'kotlin-v*'
+      - 'spring-boot-v*'
+      - 'android-v*'
+      - 'ios-v*'
+      - 'swift-v*'
+      - 'php-v*'
+
+permissions:
+  contents: write
+
+jobs:
+  # 1. CLI Release (NPM)
+  publish-cli:
+    if: startsWith(github.ref, 'refs/tags/cli-v')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build and Publish CLI
+        working-directory: cli
+        run: |
+          pnpm build
+          npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          FEEDBACK_API_URL: ${{ secrets.FEEDBACK_API_URL }}
+
+  # 2. Skill Registry Release (GitHub Release)
+  publish-skills:
+    if: "!startsWith(github.ref, 'refs/tags/cli-v')"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Extract Tag Info
+        id: tag_info
+        run: |
+          TAG_NAME=${GITHUB_REF#refs/tags/}
+          CATEGORY=${TAG_NAME%-v*}
+          VERSION=${TAG_NAME##*-}
+          echo "category=$CATEGORY" >> $GITHUB_OUTPUT
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Validate Metadata
+        run: |
+          # Read version from metadata.json for this category
+          META_VERSION=$(jq -r ".categories[\"${TAG_INFO_CATEGORY}\"].version" skills/metadata.json)
+
+          # Strip 'v' prefix from tag version (e.g., v1.0.0 -> 1.0.0)
+          CLEAN_TAG_VERSION=${TAG_INFO_VERSION#v}
+
+          echo "🔍 verifying release integrity..."
+          echo "   Category: ${TAG_INFO_CATEGORY}"
+          echo "   Metadata Version: ${META_VERSION}"
+          echo "   Release Tag: ${TAG_INFO_VERSION} (Clean: ${CLEAN_TAG_VERSION})"
+
+          if [ "$META_VERSION" == "null" ] || [ -z "$META_VERSION" ]; then
+             echo "❌ Error: Category '${TAG_INFO_CATEGORY}' not found in skills/metadata.json"
+             exit 1
+          fi
+
+          if [ "$META_VERSION" != "$CLEAN_TAG_VERSION" ]; then
+            echo "❌ Error: Version mismatch!"
+            echo "   metadata.json says: $META_VERSION"
+            echo "   git tag says:       $CLEAN_TAG_VERSION"
+            echo "   Please ensure you updated metadata.json before tagging."
+            exit 1
+          fi
+
+          echo "✅ Version match confirmed."
+        env:
+          TAG_INFO_CATEGORY: ${{ steps.tag_info.outputs.category }}
+          TAG_INFO_VERSION: ${{ steps.tag_info.outputs.version }}
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: '${{ steps.tag_info.outputs.category }} ${{ steps.tag_info.outputs.version }}'
+          body: |
+            New skills update for **${{ steps.tag_info.outputs.category }}**.
+
+            Checkout the changelog or sync in your project:
+            ```bash
+            agent-skills-standard sync
+            ```
+          generate_release_notes: true

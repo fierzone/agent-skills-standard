@@ -1,0 +1,8 @@
+# compiled output
+/dist
+/node_modules
+/build
+/coverage
+/test_output.txt
+
+.env

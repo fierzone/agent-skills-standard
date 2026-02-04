@@ -1,0 +1,228 @@
+{
+  "global": {
+    "author": "Summ Fier",
+    "repository": "https://github.com/fierzone/agent-skills-standard"
+  },
+  "categories": {
+    "flutter": {
+      "version": "1.2.0",
+      "last_updated": "2026-01-31",
+      "tag_prefix": "flutter-v",
+      "token_metrics": {
+        "total_skills": 22,
+        "total_tokens": 8778,
+        "avg_tokens_per_skill": 399,
+        "largest_skill": "layer-based-clean-architecture (521 tokens)"
+      }
+    },
+    "dart": {
+      "version": "1.0.3",
+      "last_updated": "2026-01-27",
+      "tag_prefix": "dart-v",
+      "token_metrics": {
+        "total_skills": 3,
+        "total_tokens": 1052,
+        "avg_tokens_per_skill": 351,
+        "largest_skill": "language (540 tokens)"
+      }
+    },
+    "typescript": {
+      "version": "1.0.5",
+      "last_updated": "2026-01-31",
+      "tag_prefix": "typescript-v",
+      "token_metrics": {
+        "total_skills": 4,
+        "total_tokens": 1613,
+        "avg_tokens_per_skill": 403,
+        "largest_skill": "language (486 tokens)"
+      }
+    },
+    "javascript": {
+      "version": "1.0.2",
+      "last_updated": "2026-01-26",
+      "tag_prefix": "javascript-v",
+      "token_metrics": {
+        "total_skills": 3,
+        "total_tokens": 1158,
+        "avg_tokens_per_skill": 386,
+        "largest_skill": "best-practices (407 tokens)"
+      }
+    },
+    "react": {
+      "version": "1.0.2",
+      "last_updated": "2026-01-21",
+      "tag_prefix": "react-v",
+      "token_metrics": {
+        "total_skills": 8,
+        "total_tokens": 3118,
+        "avg_tokens_per_skill": 390,
+        "largest_skill": "performance (648 tokens)"
+      }
+    },
+    "react-native": {
+      "version": "1.1.0",
+      "last_updated": "2026-01-31",
+      "tag_prefix": "react-native-v",
+      "token_metrics": {
+        "total_skills": 13,
+        "total_tokens": 5650,
+        "avg_tokens_per_skill": 435,
+        "largest_skill": "architecture (571 tokens)"
+      }
+    },
+    "nestjs": {
+      "version": "1.0.4",
+      "last_updated": "2026-01-31",
+      "tag_prefix": "nestjs-v",
+      "token_metrics": {
+        "total_skills": 18,
+        "total_tokens": 8533,
+        "avg_tokens_per_skill": 474,
+        "largest_skill": "documentation (836 tokens)"
+      }
+    },
+    "nextjs": {
+      "version": "1.1.1",
+      "last_updated": "2026-01-31",
+      "tag_prefix": "nextjs-v",
+      "token_metrics": {
+        "total_skills": 17,
+        "total_tokens": 7190,
+        "avg_tokens_per_skill": 423,
+        "largest_skill": "architecture (670 tokens)"
+      }
+    },
+    "common": {
+      "version": "1.4.0",
+      "last_updated": "2026-01-31",
+      "tag_prefix": "common-v",
+      "token_metrics": {
+        "total_skills": 12,
+        "total_tokens": 5869,
+        "avg_tokens_per_skill": 489,
+        "largest_skill": "best-practices (714 tokens)"
+      }
+    },
+    "quality-engineering": {
+      "version": "1.0.0",
+      "last_updated": "2026-01-27",
+      "tag_prefix": "quality-engineering-v",
+      "token_metrics": {
+        "total_skills": 4,
+        "total_tokens": 1775,
+        "avg_tokens_per_skill": 444,
+        "largest_skill": "zephyr-test-generation (585 tokens)"
+      }
+    },
+    "golang": {
+      "version": "1.0.2",
+      "last_updated": "2026-01-26",
+      "tag_prefix": "golang-v",
+      "token_metrics": {
+        "total_skills": 10,
+        "total_tokens": 3570,
+        "avg_tokens_per_skill": 357,
+        "largest_skill": "security (458 tokens)"
+      }
+    },
+    "angular": {
+      "version": "1.0.0",
+      "last_updated": "2026-01-22",
+      "tag_prefix": "angular-v",
+      "token_metrics": {
+        "total_skills": 14,
+        "total_tokens": 3826,
+        "avg_tokens_per_skill": 273,
+        "largest_skill": "components (347 tokens)"
+      }
+    },
+    "kotlin": {
+      "version": "1.0.0",
+      "last_updated": "2026-01-23",
+      "tag_prefix": "kotlin-v",
+      "token_metrics": {
+        "total_skills": 4,
+        "total_tokens": 1977,
+        "avg_tokens_per_skill": 494,
+        "largest_skill": "language (556 tokens)"
+      }
+    },
+    "java": {
+      "version": "1.0.0",
+      "last_updated": "2026-01-23",
+      "tag_prefix": "java-v",
+      "token_metrics": {
+        "total_skills": 5,
+        "total_tokens": 2609,
+        "avg_tokens_per_skill": 522,
+        "largest_skill": "language (636 tokens)"
+      }
+    },
+    "spring-boot": {
+      "version": "1.0.0",
+      "last_updated": "2026-01-23",
+      "tag_prefix": "spring-boot-v",
+      "token_metrics": {
+        "total_skills": 10,
+        "total_tokens": 3405,
+        "avg_tokens_per_skill": 341,
+        "largest_skill": "architecture (443 tokens)"
+      }
+    },
+    "android": {
+      "version": "1.0.1",
+      "last_updated": "2026-01-31",
+      "tag_prefix": "android-v",
+      "token_metrics": {
+        "total_skills": 22,
+        "total_tokens": 6338,
+        "avg_tokens_per_skill": 288,
+        "largest_skill": "android-design-system (438 tokens)"
+      }
+    },
+    "swift": {
+      "version": "1.0.0",
+      "last_updated": "2026-01-23",
+      "tag_prefix": "swift-v",
+      "token_metrics": {
+        "total_skills": 8,
+        "total_tokens": 2829,
+        "avg_tokens_per_skill": 354,
+        "largest_skill": "testing (394 tokens)"
+      }
+    },
+    "ios": {
+      "version": "1.0.1",
+      "last_updated": "2026-01-31",
+      "tag_prefix": "ios-v",
+      "token_metrics": {
+        "total_skills": 14,
+        "total_tokens": 5752,
+        "avg_tokens_per_skill": 411,
+        "largest_skill": "localization (475 tokens)"
+      }
+    },
+    "php": {
+      "version": "1.0.0",
+      "last_updated": "2026-01-26",
+      "tag_prefix": "php-v",
+      "token_metrics": {
+        "total_skills": 7,
+        "total_tokens": 2224,
+        "avg_tokens_per_skill": 318,
+        "largest_skill": "error-handling (341 tokens)"
+      }
+    },
+    "laravel": {
+      "version": "1.0.0",
+      "last_updated": "2026-01-26",
+      "tag_prefix": "laravel-v",
+      "token_metrics": {
+        "total_skills": 10,
+        "total_tokens": 3608,
+        "avg_tokens_per_skill": 361,
+        "largest_skill": "clean-architecture (430 tokens)"
+      }
+    }
+  }
+}
